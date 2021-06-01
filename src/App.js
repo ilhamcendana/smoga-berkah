@@ -1,9 +1,10 @@
 import './App.scss';
 
 import React, { lazy, Suspense } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
 const Home = lazy(() => import('views/Home'))
+const NotFound = lazy(() => import('views/NotFound'))
 
 function App() {
   return (
@@ -14,6 +15,12 @@ function App() {
             <Home />
           </Suspense>
         </Route>
+        <Route exact path='/not-found'>
+          <Suspense fallback={<div>Loading...</div>}>
+            <NotFound />
+          </Suspense>
+        </Route>
+        <Redirect from='*' to='/not-found' />
       </Switch>
     </div>
   );
